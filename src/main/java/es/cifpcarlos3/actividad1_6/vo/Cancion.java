@@ -12,4 +12,7 @@ public class Cancion {
     private String artista;
     private String duracion;
     private boolean esEspanola;
+
+    @Override
+    public String toString() {return "'" + anio + "' ," + titulo + ", " + artista + ", " + duracion + ", " + esEspanola;}
 }

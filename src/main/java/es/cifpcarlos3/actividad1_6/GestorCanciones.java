@@ -2,6 +2,8 @@ package es.cifpcarlos3.actividad1_6;
 
 
 import es.cifpcarlos3.actividad1_6.vo.Cancion;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +33,26 @@ public class GestorCanciones {
                     lineasIgnoradas++;
                     continue;
                 }
+                try {
+                    int anio = Integer.parseInt(partes[0].trim());
+                    String titulo = partes[1].trim();
+                    String artista = partes[2].trim();
+                    String duracion = partes[3].trim();
+                    boolean esEspanola = Boolean.parseBoolean(partes[4].trim().toLowerCase());
 
+                    Cancion cancion = new Cancion(anio, titulo, artista, duracion, esEspanola);
+                    lista.add(cancion);
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    lineasIgnoradas++;
+                }
+
+                JsonMapper mapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build();
+                mapper.writeValue(json.toFile(), lista);
+
+                System.out.println("Leídas: " + lineasLeidas + " | Válidas: " + lista.size() + " | Ignoradas: " + lineasIgnoradas);
+                System.out.println("JSON generado en: " + json.toAbsolutePath());
 
             }
         } catch (IOException e) {
