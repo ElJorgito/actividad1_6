@@ -50,11 +50,11 @@ public class GestorCanciones {
 
                 JsonMapper mapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build();
                 mapper.writeValue(json.toFile(), lista);
-
-                System.out.println("Leídas: " + lineasLeidas + " | Válidas: " + lista.size() + " | Ignoradas: " + lineasIgnoradas);
-                System.out.println("JSON generado en: " + json.toAbsolutePath());
-
             }
+
+            System.out.println("Leídas: " + lineasLeidas + " | Válidas: " + lista.size() + " | Ignoradas: " + lineasIgnoradas);
+            System.out.println("JSON generado en: " + json.toAbsolutePath());
+
         } catch (IOException e) {
             System.out.println("Error al leer el archivo " + e.getMessage());
         }
